@@ -25,6 +25,8 @@ RUN apt-get install --no-install-recommends -yqq \
     file \
     curl
 
+RUN apt-get -y install qhull-bin
+
 # --------------------------------------------------------------------------
 
 FROM build-base as builder
@@ -66,7 +68,7 @@ COPY pkg/spectra.sh /tmp
 RUN  install-helper /tmp/spectra.sh
 
 # install ParaView
-ARG paraview=5.10.1
+ARG paraview=5.11.0
 ENV PARAVIEW_VERSION=${paraview}
 
 COPY pkg/paraview.sh /tmp
@@ -112,6 +114,7 @@ RUN apt-get update \
  && apt-get -yqq --no-install-recommends install $(cat /usr/local/.pkgs) \
  && apt-get clean \
  && rm -rf /var/cache/apt/lists
+
 
 # run pvserver by default
 CMD /usr/local/bin/pvserver
