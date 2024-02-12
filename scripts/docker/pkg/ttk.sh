@@ -30,6 +30,7 @@ require-pkgs \
     protobuf-compiler       \
     python3-dev             \
     python3-numpy-dev       \
+    libqhull-dev            \
     zlib1g-dev
     
 if [ -n "${DEV}" ]; then

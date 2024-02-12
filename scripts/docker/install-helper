@@ -20,6 +20,7 @@ function require-pkgs() {
 
     echo "installing additional build packages: ${pkgs}"
     apt-get -qq -o=Dpkg::Use-Pty=0 --no-install-recommends install ${pkgs}
+    apt-get -qq -o=Dpkg::Use-Pty=0 --no-install-recommends install libqhull-dev
 }
 
 # --------------------------------------------------------------------------

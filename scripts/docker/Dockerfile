@@ -23,9 +23,19 @@ RUN apt-get install --no-install-recommends -yqq \
     cmake \
     dlocate \
     file \
-    curl
-
-RUN apt-get -y install qhull-bin
+    curl \
+    ccache \
+    libboost-system-dev \
+    libeigen3-dev \
+    libgraphviz-dev \
+    libosmesa-dev \
+    libopenmpi-dev \
+    libsqlite3-dev \
+    libwebsocketpp-dev \
+    graphviz \
+    zlib1g-dev \
+    libqhull-dev \
+    dpkg-dev
 
 # --------------------------------------------------------------------------
 
@@ -84,6 +94,8 @@ ENV TTK_VERSION=${ttk}
 
 ENV DEV=""
 
+RUN apt-get install -y libqhull-dev
+
 COPY pkg/ttk.sh /tmp
 RUN  install-helper /tmp/ttk.sh
 
@@ -114,7 +126,6 @@ RUN apt-get update \
  && apt-get -yqq --no-install-recommends install $(cat /usr/local/.pkgs) \
  && apt-get clean \
  && rm -rf /var/cache/apt/lists
-
 
 # run pvserver by default
 CMD /usr/local/bin/pvserver
